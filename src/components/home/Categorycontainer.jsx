@@ -42,8 +42,8 @@ const Categorycontainer = ({ catLoading, category }) => {
         {catLoading ? (
           <LoadingSpinner />
         ) : (
-          category.data &&
-          category.data.map((cat) => {
+          category &&
+          category.map((cat) => {
             return (
               <SwiperSlide key={cat.id}>
                 <CatCard name={cat.name} image={cat.image} />

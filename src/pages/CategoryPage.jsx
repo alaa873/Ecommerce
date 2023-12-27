@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CatCard from "../components/category/catCard";
 import {
   getCategories,
@@ -14,17 +14,17 @@ const CategoryPage = () => {
   useEffect(() => {
     dispatch(getCategories(8));
   }, []);
-  let pageCount = 0;
-
-  try {
-    if (category.paginationResult) {
-      pageCount = category.paginationResult.numberOfPages;
-    } else {
-      pageCount = 0;
+  const [pageCount, setPageCount] = useState(0);
+  useEffect(() => {
+    try {
+      if (category.paginationResult) {
+        setPageCount(category.paginationResult.numberOfPages);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
-  }
+  }, [category]);
+
   const handelOnSelectPage = (page) => {
     dispatch(getCategoryPagination(page));
   };

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/products/ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -12,20 +12,28 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const { products, isLoading, error } = useSelector((state) => state.product);
+  const [allProducts, setAllProducts] = useState([]);
+
   useEffect(() => {
     dispatch(getProducts());
   }, []);
-  let pageCount = 0;
-
-  try {
-    if (products.paginationResult) {
-      pageCount = products.paginationResult.numberOfPages;
-    } else {
-      pageCount = 0;
+  useEffect(() => {
+    if (products.data) {
+      setAllProducts(products.data);
     }
-  } catch (e) {
-    console.log(e);
-  }
+  }, [products]);
+
+  const [pageCount, setPageCount] = useState(0);
+  useEffect(() => {
+    try {
+      if (products.paginationResult) {
+        setPageCount(products.paginationResult.numberOfPages);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }, [products]);
+
   const handelOnSelectPage = (page) => {
     dispatch(getProductsPagination(page));
   };
@@ -36,8 +44,8 @@ const ProductPage = () => {
         <LoadingSpinner />
       ) : (
         <div className="grid grid-cols-18 py-4 gap-8  ">
-          {products.data ? (
-            products.data.map((product) => {
+          {allProducts ? (
+            allProducts.map((product) => {
               return <ProductCard key={product.id} product={product} />;
             })
           ) : (

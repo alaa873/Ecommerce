@@ -17,6 +17,8 @@ const HomePage = () => {
   const { products, isLoading, error } = useSelector((state) => state.product);
   const [allProducts, setAllProducts] = useState([]);
   const { category } = useSelector((state) => state.category);
+  const [allCategory, setAllCategory] = useState([]);
+
   const catLoading = useSelector((state) => state.category.isLoading);
   const { brands } = useSelector((state) => state.brand);
   const brandLoading = useSelector((state) => state.brand.isLoading);
@@ -31,6 +33,12 @@ const HomePage = () => {
     }
   }, [products]);
 
+  useEffect(() => {
+    if (category.data) {
+      setAllCategory(category.data);
+    }
+  }, [category]);
+
   return (
     <div className="container ">
       <Suspense fallback={<LoadingSpinner />}>
@@ -38,7 +46,7 @@ const HomePage = () => {
       </Suspense>
       <div className="py-4">
         <Suspense fallback={<LoadingSpinner />}>
-          <Categorycontainer catLoading={catLoading} category={category} />
+          <Categorycontainer catLoading={catLoading} category={allCategory} />
         </Suspense>
       </div>
       <CustomeButton

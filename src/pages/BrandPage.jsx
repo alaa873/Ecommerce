@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getBrnads, getBrnadsPagination } from "../redux/slice/BrandSlice";
 import CustomePagination from "../utils/Pagination";
 import BrandCard from "../components/brand/BrandCard";
@@ -10,18 +10,17 @@ const BrandPage = () => {
   useEffect(() => {
     dispatch(getBrnads(8));
   }, []);
-  console.log(brands);
-  let pageCount = 0;
-
-  try {
-    if (brands.paginationResult) {
-      pageCount = brands.paginationResult.numberOfPages;
-    } else {
-      pageCount = 0;
+  const [pageCount, setPageCount] = useState(0);
+  useEffect(() => {
+    try {
+      if (brands.paginationResult) {
+        setPageCount(brands.paginationResult.numberOfPages);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
-  }
+  }, [brands]);
+
   const handelOnSelectPage = (page) => {
     dispatch(getBrnadsPagination(page));
   };
