@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-const CustomeButton = ({ pathname, title }) => {
+const CustomeButton = ({ pathname, title, name }) => {
   return (
     <div className="flex my-4 justify-between">
-      <h1 className="text-2xl  font-bold">Categories</h1>
+      <h1 className="text-2xl  font-bold">{name}</h1>
       <Link to={pathname}>
         <button
           type="button"

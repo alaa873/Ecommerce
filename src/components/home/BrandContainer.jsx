@@ -10,7 +10,7 @@ import CustomeButton from "../../utils/CustomeButton";
 const BrandContainer = ({ brands, brandLoading }) => {
   return (
     <>
-      <CustomeButton pathname="/brand" title="All Brands" />
+      <CustomeButton name="Brand" pathname="/brand" title="All Brands" />
       <Swiper
         slidesPerView={1}
         spaceBetween={20}

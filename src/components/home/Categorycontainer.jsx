@@ -10,7 +10,11 @@ import CustomeButton from "../../utils/CustomeButton";
 const Categorycontainer = ({ catLoading, category }) => {
   return (
     <>
-      <CustomeButton pathname="/category" title="All Categories" />
+      <CustomeButton
+        name="Category"
+        pathname="/category"
+        title="All Categories"
+      />
       <Swiper
         slidesPerView={1}
         spaceBetween={20}

@@ -41,7 +41,11 @@ const HomePage = () => {
           <Categorycontainer catLoading={catLoading} category={category} />
         </Suspense>
       </div>
-      <CustomeButton pathname="/products" title="All Products" />
+      <CustomeButton
+        name="Products"
+        pathname="/products"
+        title="All Products"
+      />
       <Suspense fallback={<LoadingSpinner />}>
         {!error ? (
           isLoading ? (
