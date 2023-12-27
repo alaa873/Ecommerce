@@ -1,0 +1,20 @@
+/* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
+
+const CustomeButton = ({ pathname, title }) => {
+  return (
+    <div className="flex my-4 justify-between">
+      <h1 className="text-2xl  font-bold">Categories</h1>
+      <Link to={pathname}>
+        <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          {title}
+        </button>
+      </Link>
+    </div>
+  );
+};
+
+export default CustomeButton;
